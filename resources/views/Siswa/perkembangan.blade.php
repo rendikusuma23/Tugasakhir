@@ -3,6 +3,9 @@
 @section('css')
     
 @endsection
+@section('tittle')
+Laporan Bulanan Perkembangan | {{ Auth::user()->name }}
+@endsection
 
 @section('header')
 <div class="container-fluid">
@@ -12,7 +15,7 @@
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Siswa</a></li>
+          <li class="breadcrumb-item"><a href="/">Siswa</a></li>
           <li class="breadcrumb-item active">Laporan Bulanan Perkembangan Siswa</li>
         </ol>
       </div><!-- /.col -->
@@ -23,28 +26,33 @@
 
 @section('content')
 
-<div class="float-sm-left form-group">
-    <select class="form-control">
-    <option>Semua Bulan</option>
-    <option>Januari</option>
-    <option>Februari</option>
-    <option>Maret</option>
-    <option>April</option>
-    <option>Mei</option>
-    <option>Juni</option>
-    <option>Juli</option>
-    <option>Agustus</option>
-    <option>September</option>
-    <option>Oktober</option>
-    <option>November</option>
-    <option>Desember</option>
+<div class="col-12">
 
-    </select>
-</div>
-    
+  <form action="/siswa/filter/perkembangansiswa/" method="get">
+    @csrf
+    <div class="float-sm-left form-group" >
+      <select class="form-control"name="bulan">
+      <option disabled selected value="Semua">== Pilih Bulan ==</option>
+      <option value="Agustus">Agustus</option>
+      <option value="September">September</option>
+      <option value="Oktober">Oktober</option>
+      <option value="November">November</option>
+      <option value="Desember">Desember</option>
+      <option value="Januari">Januari</option>
+      <option value="Februari">Februari</option>
+      <option value="Maret">Maret</option>
+      <option value="April">April</option>
+      <option value="Mei">Mei</option>
+  
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm m-1 ">Tampil </button>
+  </form>
+  </div>
+      
       <!-- /.card-header -->
-      <div class="card-body table-responsive p-0" style="height: 400px;">
-        <table class="table table-head-fixed text-nowrap table-hover text-nowrap">
+      <div class="card-body table-responsive p-0" style="height: 350px;">
+        <table class="table table-head-fixed text-nowrap table-hover text-nowrap" id="perkembangan">
           <thead>
             <tr >
               <th>NO</th>
@@ -57,60 +65,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="clickable-row" data-href="/operator/bayar">
-              <td>1</td>
-              <td>Nilai Agama dan Moral</td>
-              <td>Terbiasa menyebut nama tuhan sebagai pencipta</td>
-              <td> BSH</td>
-              <td>BSH</td>
-              <td>BSH</td>
-              <td> </td>
-            </tr>
+            @php
+                $no=1;
+            @endphp
+            @foreach ($data as $g)
             <tr>
-              <td>2</td>
-              <td>Fisik Motorik</td>
-              <td>Terbiasa melakukan kegiatan kebersihan diri</td>
-              <td> </td>
-              <td> </td>
-              <td></td>
-              <td> </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Sosial Emosional</td>
-              <td>Memiliki perilaku yang bersifat percaya diri</td>
-              <td> </td>
-              <td></td>
-              <td></td>
-              <td> </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Kognitif</td>
-              <td>Mengenal benda dengan mengelompokkan benda di lingkungan</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td> </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Bahasa</td>
-              <td>Terbiasa ramah menyapa siapapun</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td> </td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>Seni</td>
-              <td>Membuat karya seni sesuai kreatifitasnya</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td> </td>
-            </tr>
+              <td>{{$no++}}</td>
+            <td >{{$g->lingkup_perkembangan}}</td>
+            <td >{{$g->nama}}</td>
+            <td >{{$g->kegiatan_anak}}</td>
+            <td >{{$g->hasil_karya}}</td>
+            <td >{{$g->hasil_akhir}}</td>
+            <td >{{$g->kesimpulan}}</td>
+
+            @endforeach
+
           </tbody>
         </table>
       </div>

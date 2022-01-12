@@ -64,9 +64,9 @@
                 <button type="button" class="btn btn-warning btn-sm ">Reset akun </button>
               </a>
 
-                <a href="">
+                {{-- <a href="">
                   <button type="button" class="btn btn-danger btn-sm m-1 ">Hapus </button>
-                </a>
+                </a> --}}
             </td>
             </tr>
                 

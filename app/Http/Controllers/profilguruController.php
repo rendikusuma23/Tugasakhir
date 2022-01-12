@@ -94,23 +94,14 @@ class profilguruController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $nama= $request->input("nama");
-        $jabatan= $request->input("jabatan");
-        $nuptk= $request->input("nuptk");
-        $jenis_kelamin= $request->input("jenis_kelamin");
-        $ttl= $request->input("ttl");
+        
         $agama= $request->input("agama");
         $pendidikan= $request->input("pendidikan");
         $email= $request->input("email");
         $telephone= $request->input("telephone");
         $alamat= $request->input("alamat");
 
-        data_guru::where('nuptk',$id)->update([
-            'nama'=>$nama,
-            'jabatan'=>$jabatan,
-            'nuptk'=>$nuptk,
-            'jenis_kelamin'=>$jenis_kelamin,
-            'ttl'=>$ttl,
+        data_guru::where('id',$id)->update([
             'agama'=>$agama,
             'pendidikan'=>$pendidikan,
             'email'=>$email,

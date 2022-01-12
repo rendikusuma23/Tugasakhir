@@ -33,6 +33,17 @@
         <form action="/filter/datasiswa" method="post">
           @csrf
           <div class="float-sm-left form-group" >
+            <select class="form-control"name="tahun">
+            <option value="Semua">Tahun Ajaran</option>
+            @forelse ($tahun as $item)
+            <option value="{{ $item->tahun_masuk }}">{{ $item->tahun_masuk }}</option>
+            @empty
+                
+            @endforelse
+            </select>
+          </div>
+
+          <div class="float-sm-left form-group" >
             <select class="form-control"name="kelas">
             <option value="Semua">Semua kelompok</option>
             <option value="Kelompok A1">Kelompok A1</option>
@@ -43,6 +54,8 @@
             <option value="Kelompok B2">Kelompok B2</option>
             <option value="Kelompok B3">Kelompok B3</option>
             <option value="Kelompok B4">Kelompok B4</option>
+            <option value="Kepompong">Kepompong</option>
+            <option value="Kupu-kupu">Kupu-kupu</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary btn-sm m-1 ">Tampil </button>
@@ -55,7 +68,7 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0" style="height: 350px;">
-        <table class="table table-head-fixed text-nowrap table-hover text-nowrap" id="tabeldata">
+        <table class="table table-head-fixed text-nowrap table-hover text-nowrap" id="example3">
           <thead>
             <tr >
               <th>NO</th>
@@ -63,6 +76,7 @@
               <th>Nama</th>
               <th>Jenis Kelamin</th>
               <th>Kelas</th>
+              <th>Tahun Masuk</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -71,16 +85,46 @@
               $no=1;
           @endphp
           @foreach ($data as $p)
-          <tr class="clickable-row" data-href="/operator/datasiswa/{{$p->id}}">
+          <tr>
             <td>{{$no++}}</td>
             <td>{{$p->no_induk}}</td>
             <td>{{$p->nama_lengkap}}</td>
             <td>{{$p->jenis_kelamin}}</td>
             <td>{{$p->kelas}}</td>
-            <td>
-              <a href="">
-                <button type="button" class="btn btn-danger btn-sm m-1 ">Hapus </button>
-              </a>
+            <td>{{$p->tahun_masuk}}</td>
+            <td><form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('data_siswa.destroy', $p->id) }}"method="POST">
+              <a href="{{ url('/operator/datasiswa', $p->id) }}" class="btn btn-sm btn-success waves-effect m-r-20">Detail</a>
+              @csrf
+              @method('DELETE')
+              <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal-danger{{$p->id}}">
+              Hapus
+            </button>
+            </form>
+            <div class="modal fade" id="modal-danger{{$p->id}}">
+              <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Hapus Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="{{ route('data_siswa.destroy', $p->id) }}"method="POST">
+                    @csrf
+                    @method('DELETE')
+                    
+                  
+                  <div class="modal-body">
+                    <p>Apakah Anda yakin untuk menghapus data ini?</p>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-outline-light">Hapus</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
             </td>
           </tr>
           @endforeach
@@ -139,41 +183,6 @@
       });
   });
 </script>
-
-{{-- <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script> --}}
-
-<!-- DataTables -->
-<link rel="stylesheet" href="{{asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-<script src="{{asset('lte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
 @endsection

@@ -48,14 +48,56 @@ class perkembanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function filternilaisiswa(Request $request,$id)
     {
         //
-        // $data = perkembangan::where('no_induk',$id)->get();
-        // return view('/guru/perkembangandetail',['perkembangan'=>$data]);
+        // echo $request->kelas;
+        if ($request->kelas == "Semua") {
+            $where= ['nilai_perkembangans.siswa'=>$id];
+        } else {
+            $where= ['nilai_perkembangans.siswa'=>$id,'Nilai_perkembangans.bulan'=>$request->bulan];
+        }
+        
+        $data = Nilai_perkembangan::join(
+            'kompetisi_indikators',
+            'nilai_perkembangans.kompetisi_indikators','=','kompetisi_indikators.id')
+        ->join('lingkup_perkembangans',
+            'kompetisi_indikators.lingkup_perkembangan','=','lingkup_perkembangans.id')
+        ->where($where)
+        ->get([
+            'nilai_perkembangans.bulan',
+            'kompetisi_indikators.id',
+            'lingkup_perkembangans.nama as lingkup_perkembangan',
+            'kompetisi_indikators.bulan',
+            'kompetisi_indikators.bulan',
+            'nilai_perkembangans.kegiatan_anak',
+            'nilai_perkembangans.hasil_karya',
+            'nilai_perkembangans.hasil_akhir',
+            'nilai_perkembangans.kesimpulan',
+        ]);
+        return view('siswa/perkembangan', compact('data','id'));
 
-        // $data = nilai_perkembangan::all();
-        // return view('guru.perkembangandetail', compact('data'));
+    }
+    public function show($id)
+    {
+        $data = Nilai_perkembangan::join('kompetisi_indikators',
+        'nilai_perkembangans.kompetisi_indikators','=','kompetisi_indikators.id')
+        ->join('lingkup_perkembangans',
+            'kompetisi_indikators.lingkup_perkembangan','=','lingkup_perkembangans.id')
+        ->where('Nilai_perkembangans.siswa',$id)
+        ->get([
+            'nilai_perkembangans.bulan',
+            'kompetisi_indikators.id',
+            'lingkup_perkembangans.nama as lingkup_perkembangan',
+            'kompetisi_indikators.nama',
+            'nilai_perkembangans.kegiatan_anak',
+            'nilai_perkembangans.hasil_karya',
+            'nilai_perkembangans.hasil_akhir',
+            'nilai_perkembangans.kesimpulan',
+        ]);
+        // echo \json_encode($data);
+        return view('operator/nilaiperkembangan/perkembangansiswa', compact('data','id'));
     }
 
     /**

@@ -27,7 +27,8 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Detail Pembayaran SPP</h3><br> <br>
-
+      <p>Nama &nbsp:{{$siswa->nama_lengkap}}</p>
+      <p>Kelas &nbsp &nbsp:{{$siswa->kelas}}</p>
 
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0" style="height: 430px;">

@@ -42,7 +42,6 @@ class Pendaftaran extends Migration
             $table->string('jarak_tempuh');
             $table->string('jumlah_saudara');
             $table->string('jenis_pendaftaran');
-            $table->integer('no_induk');
             $table->string('masuk_rombel');
             $table->enum('status',['Diterima','Belum Verifikasi']);
             $table->timestamps();

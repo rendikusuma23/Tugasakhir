@@ -1,3 +1,5 @@
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
 <aside class="main-sidebar sidebar-light-primary elevation-4"style="background-color: #27b183">
   <!-- Brand Logo -->
   <a href="/admin" class="brand-link"style="background-color: #fff">
@@ -215,6 +217,22 @@
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
+    <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- jQuery -->
+{{-- <script src="{{asset('lte/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('lte/dist/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset('../dist/js/demo.js')}}"></script> --}}
+
   </div>
   <!-- /.sidebar -->
 </aside>
+
+</div>
+</body>

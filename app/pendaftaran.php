@@ -35,7 +35,6 @@ class pendaftaran extends Model
         'jarak_tempuh',
         'jumlah_saudara',
         'jenis_pendaftaran',
-        'no_induk',
         'masuk_rombel',
         'status'
 

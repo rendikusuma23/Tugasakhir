@@ -50,10 +50,11 @@ class akunController extends Controller
     public function show($id)
     {
         //
-        $data = User::where('id',$id)->get();
+        $email = User::where('id',$id)->first('email')->email;
+        // echo $email;
         User::where('id',$id)->update(
-            ['password' => Hash::make($data->pluck('email'))]);
-        return redirect('/operator/akun');
+            ['password' => Hash::make($email)]);
+        return redirect('/operator/akun')->with(['icon'=>'success','sukses'=>'Password berhasil direset']);
     }
 
     /**

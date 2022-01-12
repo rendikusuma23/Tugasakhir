@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\data_siswa;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 
@@ -16,8 +18,9 @@ class datasiswaController extends Controller
     public function index()
     {
         //
+        $tahun = data_siswa::groupby('tahun_masuk')->get('tahun_masuk');
         $data = data_siswa::all();
-        return view('operator.datasiswa', compact('data'));
+        return view('operator.datasiswa', compact('data','tahun'));
     }
 
     /**
@@ -50,21 +53,30 @@ class datasiswaController extends Controller
     public function show($id)
     {
         //
-
         $data = data_siswa::where('id',$id)->get();
         return view('/operator/detailsiswa',['data_siswa'=>$data]);
     }
     public function filtersiswa(Request $request)
     {
         //
+        $tahun = data_siswa::groupby('tahun_masuk')->get('tahun_masuk');
         // echo $request->kelas;
         if ($request->kelas == "Semua") {
-            $data = data_siswa::all();
+            if ($request->tahun == "Semua") {
+                $data = data_siswa::all();
+                return view('operator.datasiswa', compact('data','tahun'));
+            } else {
+                $where=['tahun_masuk'=>$request->tahun];
+            }
         } else {
-            $data = data_siswa::where('kelas',$request->kelas)->get();
+            if ($request->tahun == "Semua") {
+                $where=['kelas'=>$request->kelas];
+            } else {
+                $where=['kelas'=>$request->kelas,'tahun_masuk'=>$request->tahun];
+            }
         }
-        
-        return view('operator.datasiswa', compact('data'));
+        $data = data_siswa::where($where)->get();
+        return view('operator.datasiswa', compact('data','tahun'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -125,5 +137,13 @@ class datasiswaController extends Controller
     public function destroy($id)
     {
         //
+        $data_siswa = data_siswa::find($id);
+        $email = data_siswa::find($id)->email;
+        // echo $email;
+        $akun = User::where('email',$email)->first();
+        // echo $akun;
+        $data_siswa->delete();
+        $akun->delete();
+        return redirect(route('data_siswa.index'))->with(['icon'=>'success','sukses'=>'Data siswa Berhasil Dihapus']);
     }
 }

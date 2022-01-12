@@ -4,15 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class nilai_perkembangan extends Model
+class Nilai_perkembangan extends Model
 {
     //
     protected $fillable = [
         'id',
-        'kesimpulan_perkembangan',
-        'kompetisi_indikator',
+        'siswa',
+        'bulan',
+        'kompetisi_indikators',
         'kegiatan_anak',
         'hasil_karya',
-        'hasil_akhir'
+        'hasil_akhir',
+        'kesimpulan'
+
     ];
 }

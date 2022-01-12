@@ -25,7 +25,7 @@
 
 <div class="card">
   @foreach ($guru as $g)
-  <form action="/operator/dataguru/{{$g->nuptk}}" method="POST">
+  <form action="/operator/dataguru/{{$g->id}}" method="POST">
     @method('PUT')
     @csrf
     <div class="card-body"> 

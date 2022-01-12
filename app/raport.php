@@ -17,6 +17,5 @@ class raport extends Model
         'seni',
         'siswa',
         'semester',
-        'tahun'
-    ];
+      ];
 }

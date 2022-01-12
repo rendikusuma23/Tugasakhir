@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kelompok Bermain & Taman Kanak-kanak Pembina Plus Dewi Masyithoh Kalikangkung | Dashboard</title>
@@ -102,7 +102,7 @@
                   <p class="text-muted">Fifyanti, S.Pd.AUD</p>
 
                   <strong><i class="fas fa-map-marker-alt mr-1"></i> Lokasi</strong>
-                  <p class="text-muted">Jl. Raya Kalikangkung, Pocokan, Grobog Wetan, Kec. Pangkah, Tegal, Jawa Tengah 52471</p>
+                  <p class="text-muted">Jl. Raya Selatan Kalikangkung, No.66 RT 01/RW 02 Kec. Pangkah, Kab. Tegal, Jawa Tengah 52471</p>
                   
                   <strong><i class="far fa-file-alt mr-1"></i> NPSN</strong>
                   <p class="text-muted">20362010</p>
@@ -205,18 +205,6 @@
                         Mewujudkan generasi yang unggul, berprestasi, religius dan islami.
                       </p>
 
-                      {{-- <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p> --}}
-
-                      {{-- <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                    </div> --}}
                     <!-- /.post -->
 
                     <!-- Post -->
@@ -244,14 +232,28 @@
                         6. Mewujudkan generasi yang religius dan islami <br>
                       </p>
 
-                      {{-- <form class="form-horizontal">
-                        <div class="input-group input-group-sm mb-0">
-                          <input class="form-control form-control-sm" placeholder="Response">
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-danger">Send</button>
-                          </div>
-                        </div>
-                      </form> --}}
+                    </div>
+                    <div class="post clearfix">
+                      <div class="user-block">
+                        <h2>
+                          Tujuan Sekolah
+                        </h2>
+                        {{-- <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                        <span class="username">
+                          <a href="#">Sarah Ross</a>
+                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                        </span>
+                        <span class="description">Sent you a message - 3 days ago</span> --}}
+                      </div>
+                      <!-- /.user-block -->
+                      <p>
+                        1. Mewujudkan anak yang sehat , jujur, senang belajar, dan mendiri<br>
+                        2. Mewujudkan anak yang mampu merawat dab peduli terhadap diri sendiri, teman, dan lingkungan sekitarnya <br>
+                        3. Menjadikan anak yang mampu berfikir, berkomunikasi, bertindak produktif dan kreatif melalui bahasa, musik, karya, dan gerakan sederhana <br>
+                        4. Menjadikan anak beragama sejak dini <br>
+                        5. Menciptakan iklim belajar yang kondusif bagi penyelenggaraan pendidikan, perawatan, pengasuhan, dan perlindungan anak <br>
+                      </p>
+
                     </div>
                     <!-- /.post -->
 

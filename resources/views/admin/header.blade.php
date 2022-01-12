@@ -1,3 +1,5 @@
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">  
 <nav class="main-header navbar navbar-expand navbar-dark"style="background-color: #27b183">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
@@ -42,3 +44,6 @@
 
   </ul>
 </nav>
+</div>
+
+</body>

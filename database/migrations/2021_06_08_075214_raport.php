@@ -23,7 +23,6 @@ class Raport extends Migration
             $table->text('seni');
             $table->integer('siswa');
             $table->enum('semester',['genap','ganjil']);
-            $table->string('tahun');
             $table->timestamps();
 
         });

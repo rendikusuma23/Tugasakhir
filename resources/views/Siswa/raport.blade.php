@@ -3,7 +3,9 @@
 @section('css')
     
 @endsection
-
+@section('tittle')
+Raport | {{ Auth::user()->name }}
+@endsection
 @section('header')
 <div class="container-fluid">
     <div class="row mb-2">
@@ -12,7 +14,7 @@
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Siswa</a></li>
+          <li class="breadcrumb-item"><a href="/">Siswa</a></li>
           <li class="breadcrumb-item active">Raport Siswa</li>
         </ol>
       </div><!-- /.col -->
@@ -22,11 +24,33 @@
 @endsection
 
 @section('content')
-    
+<form action="/filter/raport" method="post">
+  @csrf      
+  {{-- <div class="float-sm-left form-group" >
+    <select class="form-control"name="tahun">
+    <option value="">Tahun</option>
+    <option value="2020/2021">2020/2021</option>
+    <option value="2021/2022">2021/2022</option>
+    <option value="2022/2023">2022/2023</option>
+    <option value="2023/2024">2022/2023</option>
+    <option value="2024/2025">2022/2023</option>
+    <option value="2025/2026">2022/2023</option>
+    </select>
+  </div> --}}
+  <div class="float-sm-left form-group">
+    <select class="form-control" name="semester">
+      <option value="">Semester</option>
+      <option value="Ganjil ">Ganjil</option>
+      <option value="Genap">Genap</option>
+      </select>
+  </div>
+  <button type="submit" class="btn btn-primary btn-sm m-1 ">Tampil </button>
+</form>
       <!-- /.card-header -->
-      <div class="card-body table-responsive p-0" style="height: 400px;">
+      <div class="card-body table-responsive p-0" style="height: 450px;">
         <br>
-        <table class="table table-head-fixed text-nowrap table-hover text-nowrap">
+        {{-- <a href=""><button class="btn btn-primary">cetak</button></a> --}}
+        <table class="table table-head-fixed text-nowrap table-hover text-nowrap" id="example2">
           <thead>
             <tr >
               <th>NO</th>
@@ -40,7 +64,6 @@
               $no=1;
           @endphp
           @foreach ($data as $p)
-          <tr class="clickable-row" data-href="/siswa/raport/{{$p->id}}">
             <tr>
               <td>1</td>
               <td>Nilai Agama dan Moral</td>
@@ -71,7 +94,6 @@
               <td>Seni</td>
               <td>{{$p->seni}}</td>
             </tr>
-          </tr>
           @endforeach
           </tbody>
         </table>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\data_siswa;
 use App\pembayaran;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class pembayaransiswaController extends Controller
 {
@@ -17,6 +18,8 @@ class pembayaransiswaController extends Controller
     public function index()
     {
         //
+
+
         $siswa = data_siswa::where('email', Auth::user()->email)->pluck('id');
         $data = pembayaran::where('siswa', $siswa[0])->get();
         return view('/siswa/pembayaran',compact('data'));
@@ -43,6 +46,19 @@ class pembayaransiswaController extends Controller
     {
         //
     }
+
+    // public function filtersiswa(Request $request)
+    // {
+    //     //
+    //     // echo $request->kelas;
+    //     if ($request->kelas == "Semua") {
+    //         $data = pembayaran::all();
+    //     } else {
+    //         $data = pembayaran::where('kelas',$request->kelas)->get();
+    //     }
+        
+    //     return view('operator.bayar', compact('data'));
+    // }
 
     /**
      * Display the specified resource.

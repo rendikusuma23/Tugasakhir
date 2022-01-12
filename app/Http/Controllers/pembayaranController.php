@@ -21,6 +21,19 @@ class pembayaranController extends Controller
         return view('operator.pembayaran', compact('data'));
     }
 
+    public function filtersiswa(Request $request)
+    {
+        //
+        // echo $request->kelas;
+        if ($request->kelas == "Semua") {
+            $data = data_siswa::all();
+        } else {
+            $data = data_siswa::where('kelas',$request->kelas)->get();
+        }
+        
+        return view('operator.pembayaran', compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +46,7 @@ class pembayaranController extends Controller
 
     public function bayar($id, $bulan)
     {
+
         $tanggal = Carbon::now()->toDateString();
         pembayaran::create([
             'bulan'=>$bulan,
@@ -54,6 +68,7 @@ class pembayaranController extends Controller
     public function store(Request $request)
     {
         //
+        
         $bulan= $request->input("bulan");
         $tanggal= $request->input("tanggal");
         $keterangan= $request->input("keterangan");
@@ -77,9 +92,10 @@ class pembayaranController extends Controller
     public function show($id)
     {
         //
+        $siswa = data_siswa::find($id);
 
         $data = pembayaran::where('siswa',$id)->get();
-        return view('operator.bayar', compact('id','data'));
+        return view('operator.bayar', compact('id','data','siswa'));
         // echo $data;
     }
 

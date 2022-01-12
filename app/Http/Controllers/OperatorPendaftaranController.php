@@ -150,9 +150,36 @@ class OperatorPendaftaranController extends Controller
         $status= $request->input("status");
         $tahun_masuk=Carbon::now()->year;
 
-        pendaftaran::where('id_jenis',$id)->update(['nama_lengkap'=>$nama_lengkap,'NIK_siswa'=>$NIK_siswa,'jenis_kelamin'=>$jenis_kelamin,'ttl'=>$ttl,'agama'=>$agama,'anak_ke'=>$anak_ke,'kewarganegaraan'=>$kewarganegaraan,'usia'=>$usia,'email'=>$email,'telephone'=>$telephone,'alamat_lengkap'=>$alamat_lengkap,'nama_ayah'=>$nama_ayah,'NIK_ayah'=>$NIK_ayah,'tahunlahir_ayah'=>$tahunlahir_ayah,
-        'pendidikan_ayah'=>$pendidikan_ayah,'pekerjaan_ayah'=>$pekerjaan_ayah,'nama_ibu'=>$nama_ibu,'NIK_ibu'=>$NIK_ibu,'tahunlahir_ibu'=>$tahunlahir_ibu,'pendidikan_ibu'=>$pendidikan_ibu,'pekerjaan_ibu'=>$pekerjaan_ibu,'tinggi_badan'=>$tinggi_badan,'berat_badan'=>$berat_badan,'jarak_tempuh'=>$jarak_tempuh,
-        'jumlah_saudara'=>$jumlah_saudara,'jenis_pendaftaran'=>$jenis_pendaftaran,'no_induk'=>$no_induk,'masuk_rombel'=>$masuk_rombel,'status'=>$status]);
+        pendaftaran::where('id_jenis',$id)->update([
+            'nama_lengkap'=>$nama_lengkap,
+            'NIK_siswa'=>$NIK_siswa,
+            'jenis_kelamin'=>$jenis_kelamin,
+            'ttl'=>$ttl,
+            'agama'=>$agama,
+            'anak_ke'=>$anak_ke,
+            'kewarganegaraan'=>$kewarganegaraan,
+            'usia'=>$usia,
+            'email'=>$email,
+            'telephone'=>$telephone,
+            'alamat_lengkap'=>$alamat_lengkap,
+            'nama_ayah'=>$nama_ayah,
+            'NIK_ayah'=>$NIK_ayah,
+            'tahunlahir_ayah'=>$tahunlahir_ayah,
+            'pendidikan_ayah'=>$pendidikan_ayah,
+            'pekerjaan_ayah'=>$pekerjaan_ayah,
+            'nama_ibu'=>$nama_ibu,
+            'NIK_ibu'=>$NIK_ibu,
+            'tahunlahir_ibu'=>$tahunlahir_ibu,
+            'pendidikan_ibu'=>$pendidikan_ibu,
+            'pekerjaan_ibu'=>$pekerjaan_ibu,
+            'tinggi_badan'=>$tinggi_badan,
+            'berat_badan'=>$berat_badan,
+            'jarak_tempuh'=>$jarak_tempuh,
+            'jumlah_saudara'=>$jumlah_saudara,
+            'jenis_pendaftaran'=>$jenis_pendaftaran,
+            // 'no_induk'=>$no_induk,
+            'masuk_rombel'=>$masuk_rombel,
+            'status'=>$status]);
         if ($request->input("status") == "Diterima") {
             data_siswa::create([
                 'jenis_tingkatan'=>$jenis_tingkatan,
@@ -180,8 +207,7 @@ class OperatorPendaftaranController extends Controller
                     'password' => Hash::make($request->input("email"))]);
             }
 
-        return redirect("/operator/pendaftaran");
-        
+        return redirect("/operator/pendaftaran")->with(['icon'=>'success','sukses'=>'Pendaftaran Berhasil Dikonfirmasi']);
     }
 
     /**

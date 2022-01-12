@@ -22,91 +22,63 @@
 @endsection
 
 @section('content')
-<div class="col-12">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Data Bulanan Perkembangan Siswa</h3><br>
-        <!-- select -->
-        <div class="float-sm-left form-group">
-            <select class="form-control">
-            <option>Semua kelompok</option>
-            <option>Kelompok A1</option>
-            <option>Kelompok A2</option>
-            <option>Kelompok A3</option>
-            <option>Kelompok A4</option>
-            <option>Kelompok B1</option>
-            <option>Kelompok B2</option>
-            <option>Kelompok B3</option>
-            <option>Kelompok B4</option>
+<div class="col-lg-4 col-6">
+  <!-- small card -->
+  <div class="small-box " style="background-color: #27b183">
+    <div class="inner">
+      <h4 style="color: #ffff">Lingkup Perkembangan</h4>
 
-            </select>
-        </div>
-        <div class="float-sm-left form-group">
-            <select class="form-control">
-            <option>Semua Bulan</option>
-            <option>Januari</option>
-            <option>Februari</option>
-            <option>Maret</option>
-            <option>April</option>
-            <option>Mei</option>
-            <option>Juni</option>
-            <option>Juli</option>
-            <option>Agustus</option>
-            <option>September</option>
-            <option>Oktober</option>
-            <option>November</option>
-            <option>Desember</option>
-
-            </select>
-        </div>
-        <div class="float-sm-left form-group">
-            <select class="form-control">
-            <option>Semua Status</option>
-            <option>Belum Lengkap</option>
-
-            </select>
-        </div>
- 
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body table-responsive p-0" style="height: 350px;">
-        <table class="table table-head-fixed text-nowrap" id="tabeldata">
-          <thead>
-            <tr>
-              <th>NO</th>
-              <th>Nama</th>
-              <th>Bulan</th>
-              <th>Kelompok</th>
-              <th>No Induk</th>
-              <th>status</th>
-            </tr>
-          </thead>
-          <tbody>
-            @php
-              $no=1;
-          @endphp
-          @foreach ($data as $p)
-          <tr>
-            <td>{{$no++}}</td>
-            <td>{{$p->nama_lengkap}}</td>
-            <td></td>
-            <td>{{$p->kelas}}</td>
-            <td>{{$p->no_induk}}</td>
-          </tr>
-          @endforeach
-            
-              {{-- <td><span class="badge bg-success">Lengkap</span></td>
-              <td><span class="badge bg-danger">Belum Lengkap</span></td> --}}
-          </tbody>
-        </table>
-      </div>
-      {{-- <div class="col-2  p-2 float-sm-right">
-        <button type="button" class="btn btn-block btn-outline-success">Kirim</button>
-    </div> --}}
-      <!-- /.card-body -->
+      <p style="color: #27b183">br</p>
     </div>
-    <!-- /.card -->
+    <div class="icon">
+      <i class="far fa-bookmark"></i>
+    </div>
+    <a href="/operator/lingkupperkembangan" class="small-box-footer">
+      Kelola Data <i class="fas fa-arrow-circle-right"></i>
+    </a>
   </div>
+</div>
+  <!-- /.col -->
+  
+  <div class="col-lg-4 col-6">
+    <!-- small card -->
+    <div class="small-box " style="background-color: #27b183">
+      <div class="inner">
+        <h4 style="color: #ffff">Kompetisi dan Indikator</h4>
+
+        <p style="color: #27b183">.</p>
+      </div>
+      <div class="icon">
+        <i class="far fa-bookmark"></i>
+      </div>
+      <a href="/operator/kompetisiindikator" class="small-box-footer">
+        Kelola Data <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+  <!-- /.col -->
+
+  <div class="col-lg-4 col-6">
+    <!-- small card -->
+    <div class="small-box "style="background-color: #27b183">
+      <div class="inner">
+        <h4 style="color: #ffff">Nilai Perkembangan</h4>
+
+        <p><br></p>
+      </div>
+      <div class="icon">
+        <i class="far fa-bookmark"></i>
+      </div>
+      <a href="/operator/nilaiperkembangan" class="small-box-footer">
+        Kelola Data <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+  <!-- /.col -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+  <!-- /.col -->
 
 @endsection
 

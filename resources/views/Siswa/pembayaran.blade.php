@@ -4,16 +4,20 @@
     
 @endsection
 
+@section('tittle')
+Pembayaran SPP | {{ Auth::user()->name }}
+@endsection
+
 @section('header')
 <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Pembayaran</h1>
+        <h1 class="m-0">Catatan Pembayaran SPP</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Siswa</a></li>
-          <li class="breadcrumb-item active">Pembayaran</li>
+          <li class="breadcrumb-item"><a href="/">Siswa</a></li>
+          <li class="breadcrumb-item active">Pembayaran SPP</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -25,7 +29,7 @@
     
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0" style="height: 500px;">
-        <table class="table table-head-fixed text-nowrap table-hover text-nowrap">
+        <table class="table table-head-fixed text-nowrap table-hover text-nowrap" id="example2">
           <thead>
             <tr >
               <th>NO</th>

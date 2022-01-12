@@ -22,6 +22,42 @@ class raportController extends Controller
 
     }
 
+    public function filterlihatraport(Request $request,$id)
+    {
+        //
+        $siswa = data_siswa::where('id',$id)->first();
+        // echo $request->kelas;
+        // if ($request->tahun == "") {
+            if ($request->semester == "") {
+                $data = raport::all();
+            } else {
+                $data = raport::where(['siswa'=>$id,'semester'=>$request->semester])->get();
+            }
+        // } else {
+        //     if ($request->semester == "") {
+        //         $data = raport::where(['tahun'=>$request->tahun])->get();
+        //     } else {
+        //         $data = raport::where(['tahun'=>$request->tahun, 'semester'=>$request->semester])->get();
+        //     }
+        // }
+        
+        return view('guru.lihatraport', compact('id','data','siswa'));
+    }
+    public function filtersiswa(Request $request)
+    {
+        //
+        
+        // echo $request->kelas;
+        if ($request->kelas == "Semua") {
+            $data = data_siswa::all();
+        } else {
+            $data = data_siswa::where('kelas',$request->kelas)->get();
+        }
+        
+        return view('guru.raport', compact('data'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,14 +86,32 @@ class raportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function lihatraport($id)
     {
-        //
+        $siswa = data_siswa::find($id);
+
         // $data = raport::where('id',$id)->get();
         // return view('/guru/raportdetail',['raport'=>$data]);
 
         // where('id_jenis',$id)->get();
-        return view('guru.raportdetail', compact('id'));      
+        $data = raport::where('id',$id)->get();
+
+        return view('guru.lihatraport', compact('id','siswa','data'));      
+
+    }
+     
+    public function show($id)
+    {
+        //
+        
+        $siswa = data_siswa::find($id);
+
+        // $data = raport::where('id',$id)->get();
+        // return view('/guru/raportdetail',['raport'=>$data]);
+
+        // where('id_jenis',$id)->get();
+        return view('guru.raportdetail', compact('id','siswa'));      
 
     }
 

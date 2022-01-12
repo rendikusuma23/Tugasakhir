@@ -17,11 +17,6 @@
   <!-- dropzonejs -->
   <link rel="stylesheet" href="{{ asset('lte/plugins/dropzone/min/dropzone.min.css') }}">
   
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="{{asset('lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="{{asset('lte/plugins/toastr/toastr.min.css')}}">
-  
 @endsection
 
 @section('header')
@@ -57,6 +52,15 @@
             </ul>
         </div>
         @endif --}}
+        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                            <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
 
 <div class="card">
 <div class="card-body">
@@ -65,11 +69,11 @@
     <dl class="row ">
       <dl class="input-group mb-3">
         <dt class="col-sm-4">Nama Guru</dt>
-        <dd class="col-sm-5"><input type="text" name="nama" class="form-control"value=" "></dd>
+        <dd class="col-sm-5"><input type="text" name="nama" class="form-control"value=" " required></dd>
         <dt class="col-sm-4">Jabatan</dt>
-        <dd class="col-sm-5"><input type="text" name="jabatan" class="form-control" value=" "></dd>
+        <dd class="col-sm-5"><input type="text" name="jabatan" class="form-control" value=" " required></dd>
         <dt class="col-sm-4">NUPTK</dt>
-        <dd class="col-sm-5"><input type="number" name="nuptk" class="form-control" value=" "></dd>
+        <dd class="col-sm-5"><input type="text" name="nuptk" maxlength="16" class="form-control" value=" "></dd>
         <dt class="col-sm-4">Jenis Kelamin</dt>
         <dd class="col-sm-5">
           <select name="jenis_kelamin" class="form-control">
@@ -78,7 +82,7 @@
               </select>
                   </dd>
         <dt class="col-sm-4">Tempat dan Tanggal Lahir</dt>
-        <dd class="col-sm-5"><input type="text" name="ttl" class="form-control" value=" "></dd>
+        <dd class="col-sm-5"><input type="text" name="ttl" class="form-control" value=" " required ></dd>
         {{-- <dt class="col-sm-4">Tanggal Lahir</dt>
         <dd class="col-sm-5">
           <div class="input-group date" id="reservationdate" data-target-input="nearest">
@@ -95,24 +99,24 @@
               <option>Hindu</option>
               <option>Kristen</option>  
               <option>Katholik</option>  
-              <option>konghuchu</option>
+              <option>Konghuchu</option>
               </select>
                   </dd>
         <dt class="col-sm-4">Pendidikan</dt>
-        <dd class="col-sm-5"><input type="text" name="pendidikan" class="form-control" value=" "></dd>
+        <dd class="col-sm-5"><input type="text" name="pendidikan" class="form-control" value=" " required></dd>
         <dt class="col-sm-4">Email</dt>
-        <dd class="col-sm-5"><input type="text" name="email" class="form-control" value=" "></dd>
+        <dd class="col-sm-5"><input type="text" name="email"  class="form-control" value=" " required></dd>
         <dt class="col-sm-4">Telephone</dt>
-        <dd class="col-sm-5"><input type="number" name="telephone" class="form-control" value=""></dd>
+        <dd class="col-sm-5"><input type="text" name="telephone" maxlength="13" class="form-control" value="" required></dd>
         <dt class="col-sm-4">Alamat</dt>
         <dd class="col-sm-5">
-          <textarea name="alamat" id="" cols="30" rows="5" class="form-control" value="" placeholder="jalan, desa/kelurahan, kecamatan, kabupaten/kota"></textarea>
+          <textarea name="alamat" id="" cols="30" rows="5" class="form-control" value="" placeholder="jalan, desa/kelurahan, kecamatan, kabupaten/kota" required></textarea>
         </dd>
       </dl>
       </dl>
       <dt class="col-sm-4"></dt>
       <dd class="col-sm-2">
-          <button type="submit" class="btn btn-block btn-success swalDefaultSuccess">Simpan</button>
+          <button type="submit" class="btn btn-block btn-success swalDefaultSuccess ">Simpan</button>
       </dd>
   </form>   
   </div>
@@ -120,164 +124,7 @@
 @endsection
 
 @section('js')
-{{-- <!-- SweetAlert2 -->
-<script src="{{(lte/plugins/sweetalert2/sweetalert2.min.js)}}"></script>
-<!-- Toastr -->
-<script src="{{(lte/plugins/toastr/toastr.min.js)}}"></script>
-<script>
-  $(function() {
-    var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
 
-    $('.swalDefaultSuccess').click(function() {
-      Toast.fire({
-        icon: 'success',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultInfo').click(function() {
-      Toast.fire({
-        icon: 'info',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultError').click(function() {
-      Toast.fire({
-        icon: 'error',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultWarning').click(function() {
-      Toast.fire({
-        icon: 'warning',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultQuestion').click(function() {
-      Toast.fire({
-        icon: 'question',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-
-    $('.toastrDefaultSuccess').click(function() {
-      toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-    });
-    $('.toastrDefaultInfo').click(function() {
-      toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-    });
-    $('.toastrDefaultError').click(function() {
-      toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-    });
-    $('.toastrDefaultWarning').click(function() {
-      toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-    });
-
-    $('.toastsDefaultDefault').click(function() {
-      $(document).Toasts('create', {
-        title: 'Toast Title',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultTopLeft').click(function() {
-      $(document).Toasts('create', {
-        title: 'Toast Title',
-        position: 'topLeft',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultBottomRight').click(function() {
-      $(document).Toasts('create', {
-        title: 'Toast Title',
-        position: 'bottomRight',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultBottomLeft').click(function() {
-      $(document).Toasts('create', {
-        title: 'Toast Title',
-        position: 'bottomLeft',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultAutohide').click(function() {
-      $(document).Toasts('create', {
-        title: 'Toast Title',
-        autohide: true,
-        delay: 750,
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultNotFixed').click(function() {
-      $(document).Toasts('create', {
-        title: 'Toast Title',
-        fixed: false,
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultFull').click(function() {
-      $(document).Toasts('create', {
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        icon: 'fas fa-envelope fa-lg',
-      })
-    });
-    $('.toastsDefaultFullImage').click(function() {
-      $(document).Toasts('create', {
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        image: '../../dist/img/user3-128x128.jpg',
-        imageAlt: 'User Picture',
-      })
-    });
-    $('.toastsDefaultSuccess').click(function() {
-      $(document).Toasts('create', {
-        class: 'bg-success',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultInfo').click(function() {
-      $(document).Toasts('create', {
-        class: 'bg-info',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultWarning').click(function() {
-      $(document).Toasts('create', {
-        class: 'bg-warning',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultDanger').click(function() {
-      $(document).Toasts('create', {
-        class: 'bg-danger',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.toastsDefaultMaroon').click(function() {
-      $(document).Toasts('create', {
-        class: 'bg-maroon',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-  });
-</script> --}}
 <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

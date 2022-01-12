@@ -24,16 +24,21 @@
 
 @section('content')
 
-@if(session('sukses'))
+{{-- @if(session('sukses'))
         <div class="alert alert-success" role="alert">
             {{session('sukses')}}
         </div>
-        @endif
+        @endif --}}
 
 <div class="col-12">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Data Pendaftaran Siswa Baru</h3><br>
+      <div class="col-2  p-1 float-sm-right">
+        <a href="/operator/riwayatpendaftaran">
+          <button type="button" class="btn btn-block btn-primary btn-sm ">Riwayat Pendaftaran </button>
+        </a>
+      </div>
       <!-- select --> 
       {{-- <div class="float-sm-left form-group">
           <select class="form-control">
@@ -79,9 +84,9 @@
                 <button type="button" class="btn btn-success btn-sm ">Konfirmasi </button>
               </a>
               
-              <a href="">
+              {{-- <a href="">
                 <button type="button" class="btn btn-danger btn-sm m-1 ">Hapus </button>
-              </a>
+              </a> --}}
             </td>
           </tr>
           @endforeach

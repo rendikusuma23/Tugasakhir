@@ -20,6 +20,35 @@ class raportOperatorController extends Controller
         return view('operator.raport', compact('data'));
     }
 
+    public function filterraportoperator(Request $request)
+    {
+        //
+        // echo $request->kelas;
+        if ($request->kelas == "Semua") {
+            $data = data_siswa::all();
+        } else {
+            $data = data_siswa::where('kelas',$request->kelas)->get();
+        }
+        
+        return view('/operator.raport', compact('data'));
+    }
+    public function filtersemester(Request $request,$id)
+    {
+        //
+        $siswa = data_siswa::where('id',$id)->first();
+        // echo $request->kelas;
+        if ($request->semester == "Semua") {
+            // $data = data_siswa::all();
+            $data = raport::where('siswa',$id)->get();
+        } else {
+            // echo $request->semester;
+            $data = raport::where(['siswa'=>$id,'semester'=>$request->semester])->get();
+            // echo $data;
+            // $data = data_siswa::where('kelas',$request->semester)->get();
+        }
+        return view('/operator/raportdetail',['data'=>$data,'id'=>$id,'siswa'=>$siswa]);
+        // return view('/operator.raportdetail', compact('data'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,6 +79,9 @@ class raportOperatorController extends Controller
     public function show($id)
     {
         //
+        $siswa = data_siswa::where('id',$id)->first();
+        $data = raport::where('siswa',$id)->get();
+        return view('/operator/raportdetail',['data'=>$data,'id'=>$id,'siswa'=>$siswa]);
     }
 
     /**

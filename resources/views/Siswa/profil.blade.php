@@ -12,7 +12,7 @@
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Siswa</a></li>
+          <li class="breadcrumb-item"><a href="/">Siswa</a></li>
           <li class="breadcrumb-item active">Profil saya</li>
         </ol>
       </div><!-- /.col -->
@@ -79,11 +79,11 @@
             <dl class="row">
                 <dl class="input-group mb-3">
                   <dt class="col-sm-4">Password Lama</dt>
-                  <dd class="col-sm-5"><input type="text" placeholder="masukkan password lama" class="form-control"value=""></dd>
+                  <dd class="col-sm-5"><input type="text" placeholder="masukkan password lama" class="form-control"></dd>
                   <dt class="col-sm-4">Password Baru</dt>
-                  <dd class="col-sm-5"><input type="text" placeholder="masukkan password baru" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input type="text" placeholder="masukkan password baru" class="form-control"></dd>
                   <dt class="col-sm-4">Masukkan Lagi</dt>
-                  <dd class="col-sm-5"><input type="text" placeholder="masukkan password baru" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input type="text" placeholder="masukkan password baru" class="form-control"></dd>
                   <dt class="col-sm-4"></dt>
                     {{-- <dd class="col-sm-2">
                         <a href="/siswa/ubahemail">

@@ -28,21 +28,23 @@
       <div class="card-header">
         <h3 class="card-title">Daftar Siswa</h3><br> <br>
 
-        <div class="float-sm-left form-group">
-          <select class="form-control">
-          <option>Semua kelompok</option>
-          <option>Kelompok A1</option>
-          <option>Kelompok A2</option>
-          <option>Kelompok A3</option>
-          <option>Kelompok A4</option>
-          <option>Kelompok B1</option>
-          <option>Kelompok B2</option>
-          <option>Kelompok B3</option>
-          <option>Kelompok B4</option>
-
-          </select>
-      </div>
-
+        <form action="/filter/pembayaran" method="post">
+          @csrf
+          <div class="float-sm-left form-group" >
+            <select class="form-control"name="kelas">
+            <option value="Semua">Semua kelompok</option>
+            <option value="Kelompok A1">Kelompok A1</option>
+            <option value="Kelompok A2">Kelompok A2</option>
+            <option value="Kelompok A3">Kelompok A3</option>
+            <option value="Kelompok A4">Kelompok A4</option>
+            <option value="Kelompok B1">Kelompok B1</option>
+            <option value="Kelompok B2">Kelompok B2</option>
+            <option value="Kelompok B3">Kelompok B3</option>
+            <option value="Kelompok B4">Kelompok B4</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm m-1 ">Tampil </button>
+        </form>
 
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0" style="height: 350px;">

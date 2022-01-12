@@ -27,6 +27,11 @@
   <link rel="stylesheet" href="{{asset('lte/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('lte/plugins/summernote/summernote-bs4.min.css')}}">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{asset('lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{asset('lte/plugins/toastr/toastr.min.css')}}">
+
 </head>
 <body class="sidebar-none layout-fixed sidebar-collapse ">
 
@@ -73,8 +78,18 @@
       </section>
   
       <!-- Main content -->
+
       <section class="content">
         <div class="card">
+          @if (count($errors) > 0)
+                            <div class="alert alert-warning">
+                            <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
           <form action="pendaftaran" method="POST"  enctype="multipart/form-data">
             @csrf
             <div class="card-body ml-5">
@@ -82,9 +97,9 @@
                 <dl class="input-group mb-3">
                   <dt class="col-sm-4">Pilih Jenis Tingkatan</dt>
                   <dd class="col-sm-5">
-                    <select name="jenis_tingkatan" class="form-control">
-                      <option>Kelompok Bermain</option>
-                      <option>Taman Kanak-Kanak</option>  
+                    <select name="jenis_tingkatan" class="form-control" required>
+                      <option value="Kelompok Bermain" {{ old('jenis_tingkatan') == 'Kelompok Bermain' ? 'selected' : '' }}>Kelompok Bermain</option>
+                      <option value="Taman Kanak-Kanak" {{ old('jenis_tingkatan') == 'Taman Kanak-Kanak' ? 'selected' : '' }}>Taman Kanak-Kanak</option>  
                     </select>
                   </dd>
                 </dl>
@@ -94,43 +109,43 @@
                 <dl class="input-group mb-3">
                   
                   <dt class="col-sm-4">Nama Lengkap</dt>
-                  <dd class="col-sm-5"><input type="text" name="nama_lengkap" class="form-control"value=" "></dd>
+                  <dd class="col-sm-5"><input type="text" name="nama_lengkap" class="form-control"value="{{ old('nama_lengkap') }}" required></dd>
                   <dt class="col-sm-4">NIK</dt>
-                  <dd class="col-sm-5"><input type="number" name="NIK_siswa" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input type="text" name="NIK_siswa" onkeypress="return event.charCode >= 48 && event.charCode <=57" maxlength="16" class="form-control" value="{{ old('NIK_siswa') }}" required></dd>
                   <dt class="col-sm-4">Jenis Kelamin</dt>
                   <dd class="col-sm-5">
                     <select name="jenis_kelamin" class="form-control">
-                      <option>Laki-Laki</option>
-                      <option>Perempuan</option>  
+                      <option value="Laki-Laki" {{ old('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                      <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>  
                     </select>
                   </dd>
-                  <dt class="col-sm-4">Tempat dan Tanggal Lahir</dt>
-                  <dd class="col-sm-5"><input type="text" name="ttl" class="form-control" value=" "></dd>
+                  <dt class="col-sm-4">Tempat Lahir</dt>
+                  <dd class="col-sm-5"><input type="text" name="tempat_lahir" class="form-control" value="{{ old('tempat_lahir') }}" required></dd>
+                  <dt class="col-sm-4">Tanggal Lahir</dt>
+                  <dd class="col-sm-5"><input type="date" name="tanggal_lahir" class="form-control" value="{{ old('tanggal_lahir') }}" required></dd>
                   <dt class="col-sm-4">Agama</dt>
                   <dd class="col-sm-5">
                     <select name="agama" class="form-control">
-                        <option>Islam</option>
-                        <option>Hindu</option>
-                        <option>Kristen</option>  
-                        <option>Katholik</option>  
-                        <option>konghuchu</option>  
+                        <option value="Islam" {{ old('agama') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                        <option value="Hindu" {{ old('agama') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                        <option value="Kristen" {{ old('agama') == 'Kristen' ? 'selected' : '' }}>Kristen</option>  
+                        <option value="Katholik" {{ old('agama') == 'Katholik' ? 'selected' : '' }}>Katholik</option>  
+                        <option value="konghuchu" {{ old('agama') == 'konghuchu' ? 'selected' : '' }}>konghuchu</option>  
             
                         </select>
                             </dd>
                   {{-- <dd class="col-sm-5"><input type="text" name="agama" class="form-control" value=" "></dd> --}}
                   <dt class="col-sm-4">Anak ke</dt>
-                  <dd class="col-sm-5"><input type="text" name="anak_ke" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input type="text" name="anak_ke" class="form-control" value="{{ old('anak_ke') }}" required></dd>
                   <dt class="col-sm-4">Kewarganegaraan</dt>
-                  <dd class="col-sm-5"><input type="text " name="kewarganegaraan" class="form-control" value=" "></dd>
-                  <dt class="col-sm-4">Usia</dt>
-                  <dd class="col-sm-5"><input type="text " name="usia" class="form-control" value=" "></dd>        
+                  <dd class="col-sm-5"><input type="text " name="kewarganegaraan" class="form-control" value="{{ old('kewarganegaraan') }}" required></dd>
                   <dt class="col-sm-4">Email</dt>
-                  <dd class="col-sm-5"><input type="text " name="email" class="form-control" value=" "></dd>        
+                  <dd class="col-sm-5"><input type="text " name="email" class="form-control" value="{{ old('email') }}" required></dd>        
                   <dt class="col-sm-4">Telephone</dt>
-                  <dd class="col-sm-5"><input type="number" name="telephone" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input type="text" name="telephone" onkeypress="return event.charCode >= 48 && event.charCode <=57" maxlength="13" class="form-control" value="{{ old('telephone') }}" required></dd>
                   <dt class="col-sm-4">Alamat Lengkap</dt>
                   <dd class="col-sm-5">
-                    <textarea name="alamat_lengkap" id="" cols="30" rows="5" class="form-control" placeholder="jalan, desa/kelurahan, kecamatan, kabupaten/kota"></textarea>
+                    <textarea name="alamat_lengkap" id="" cols="30" rows="5"  class="form-control" placeholder="jalan, desa/kelurahan, kecamatan, kabupaten/kota" required>{{ old('alamat_lengkap') }}</textarea>
                     {{-- <input name="alamat_lengkap" type="textarea" class="form-control" value="" placeholder="Jalan">
                     <input name="alamat_lengkap" type="text " class="form-control" value="" placeholder="Desa/Kelurahan" >
                     <input name="alamat_lengkap" type="text " class="form-control" value="" placeholder="Kecamatan">
@@ -142,25 +157,25 @@
               <dl class="row ">
                 <dl class="input-group mb-3">
                   <dt class="col-sm-4">Nama Ayah</dt>
-                  <dd class="col-sm-5"><input name="nama_ayah" type="text" class="form-control"value=" "></dd>
+                  <dd class="col-sm-5"><input name="nama_ayah" type="char" class="form-control"value="{{ old('nama_ayah') }}" required></dd>
                   <dt class="col-sm-4">NIK</dt>
-                  <dd class="col-sm-5"><input name="NIK_ayah" type="number" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input name="NIK_ayah" type="text" onkeypress="return event.charCode >= 48 && event.charCode <=57" maxlength="16" class="form-control" value="{{ old('NIK_ayah') }}" required></dd>
                   <dt class="col-sm-4">Tahun Lahir</dt>
-                  <dd class="col-sm-5"><input name="tahunlahir_ayah" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="tahunlahir_ayah" onkeypress="return event.charCode >= 48 && event.charCode <=57" type="text" maxlength="4" class="form-control" value="{{ old('tahunlahir_ayah') }}" required></dd>
                   <dt class="col-sm-4">Pendidikan</dt>
-                  <dd class="col-sm-5"><input name="pendidikan_ayah" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="pendidikan_ayah" type="text" class="form-control" value="{{ old('pendidikan_ayah') }}" required></dd>
                   <dt class="col-sm-4">Pekerjaan</dt>
-                  <dd class="col-sm-5"><input name="pekerjaan_ayah" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="pekerjaan_ayah" type="text" class="form-control" value="{{ old('pekerjaan_ayah') }}" required></dd>
                   <dt class="col-sm-4">Nama Ibu</dt>
-                  <dd class="col-sm-5"><input name="nama_ibu" type="text" class="form-control"value=" "></dd>
+                  <dd class="col-sm-5"><input name="nama_ibu" type="text" class="form-control"value="{{ old('nama_ibu') }}" required></dd>
                   <dt class="col-sm-4">NIK</dt>
-                  <dd class="col-sm-5"><input name="NIK_ibu" type="number" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input name="NIK_ibu" type="text" onkeypress="return event.charCode >= 48 && event.charCode <=57" maxlength="16" class="form-control" value="{{ old('NIK_ibu') }}" required></dd>
                   <dt class="col-sm-4">Tahun Lahir</dt>
-                  <dd class="col-sm-5"><input name="tahunlahir_ibu" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="tahunlahir_ibu" type="text" onkeypress="return event.charCode >= 48 && event.charCode <=57" maxlength="4" class="form-control" value="{{ old('tahunlahir_ibu') }}" required></dd>
                   <dt class="col-sm-4">Pendidikan</dt>
-                  <dd class="col-sm-5"><input name="pendidikan_ibu" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="pendidikan_ibu" type="text" class="form-control" value="{{ old('pendidikan_ibu') }}" required></dd>
                   <dt class="col-sm-4">Pekerjaan</dt>
-                  <dd class="col-sm-5"><input name="pekerjaan_ibu" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="pekerjaan_ibu" type="text" class="form-control" value="{{ old('pekerjaan_ibu') }}" required></dd>
                 </dl>
               </dl>
 
@@ -168,13 +183,13 @@
               <dl class="row ">
                 <dl class="input-group mb-3">
                   <dt class="col-sm-4">Tinggi Badan</dt>
-                  <dd class="col-sm-5"><input name="tinggi_badan" type="text" class="form-control" value=""></dd>
+                  <dd class="col-sm-5"><input name="tinggi_badan" type="text" class="form-control" value="{{ old('tinggi_badan') }}" required></dd>
                   <dt class="col-sm-4">Berat Badan</dt>
-                  <dd class="col-sm-5"><input name="berat_badan" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="berat_badan" type="text" class="form-control" value="{{ old('berat_badan') }}" required></dd>
                   <dt class="col-sm-4">Jarak Tempuh</dt>
-                  <dd class="col-sm-5"><input name="jarak_tempuh" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="jarak_tempuh" type="text" class="form-control" value="{{ old('jarak_tempuh') }}" required></dd>
                   <dt class="col-sm-4">Jumlah Saudara</dt>
-                  <dd class="col-sm-5"><input name="jumlah_saudara" type="text" class="form-control" value=" "></dd>
+                  <dd class="col-sm-5"><input name="jumlah_saudara" type="text" class="form-control" value="{{ old('jumlah_saudara') }}" required></dd>
                   <br>
                 </dl>
               </dl>
@@ -185,25 +200,23 @@
                   <dt class="col-sm-4">Jenis pendaftaran</dt>
                   <dd class="col-sm-5">
                     <select name="jenis_pendaftaran" class="form-control">
-                      <option>Siswa Baru</option>
-                      <option>Pindahan</option>
-                      <option>Sekolah Lagi</option>    
+                      <option value="Siswa Baru" {{ old('jenis_pendaftaran') == 'Siswa Baru' ? 'selected' : '' }}>Siswa Baru</option>
+                      <option value="Pindahan" {{ old('jenis_pendaftaran') == 'Pindahan' ? 'selected' : '' }}>Pindahan</option>
+                      <option value="Sekolah Lagi" {{ old('jenis_pendaftaran') == 'Sekolah Lagi' ? 'selected' : '' }}>Sekolah Lagi</option>    
                     </select>
                   </dd>
-                  <dt class="col-sm-4">No Induk Siswa</dt>
-                  <dd class="col-sm-5"><input name="no_induk" type="text" class="form-control" value=" "></dd>
                   <dt class="col-sm-4">Masuk Rombel</dt>
                   <dd class="col-sm-5">
                   <select name="masuk_rombel" class="form-control">
-                    <option>(A) 4-5 Tahun</option>
-                    <option>(B) 5-6 Tahun</option>
-                    <option>(C) 3 Tahun</option>
+                    <option value="(A) 4-5 Tahun" {{ old('masuk_rombel') == '(A) 4-5 Tahun' ? 'selected' : '' }}>(A) 4-5 Tahun</option>
+                    <option value="(B) 5-6 Tahun" {{ old('masuk_rombel') == '(B) 5-6 Tahun' ? 'selected' : '' }}>(B) 5-6 Tahun</option>
+                    <option value="(C) 3 Tahun" {{ old('masuk_rombel') == '(C) 3 Tahun' ? 'selected' : '' }}>(C) 3 Tahun</option>
                   </select>
                   </dd>
                   <br>
                   <dt class="col-sm-4"></dt>
                   <dd class="col-sm-2">
-                    <button type="submit" class="btn btn-block btn-success swalDefaultSuccess">Simpan</button>
+                    <button type="submit" class="btn btn-block btn-success ">Simpan</button>
                   </dd>
                 </dl>
               </dl>
@@ -231,6 +244,11 @@
   
 <!-- jQuery -->
 <script src="{{asset('lte/plugins/jquery/jquery.min.js')}}"></script>
+<!-- SweetAlert2 -->
+<script src="{{asset('lte/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<!-- Toastr -->
+<script src="{{asset('lte/plugins/toastr/toastr.min.js')}}"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('lte/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -270,5 +288,29 @@
   bsCustomFileInput.init();
 }); 
 </script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+
+
+@if(session('sukses'))
+      {{-- <div class="alert alert-success" role="alert">
+          {{session('sukses')}}
+      </div> --}}
+      <script type="text/javascript">
+        $(document).ready(function(){
+          var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000
+          });
+            Toast.fire({
+              icon: '{{session('icon')}}',
+              title: '&nbsp; &nbsp; &nbsp;  {{session('sukses')}}'
+            });
+        });
+      </script>
+      @endif
 </body>
 </html>

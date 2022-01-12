@@ -13,7 +13,7 @@
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Guru</a></li>
+          <li class="breadcrumb-item"><a href="/">Guru</a></li>
           <li class="breadcrumb-item active">Ubah Password</li>
         </ol>
       </div><!-- /.col -->

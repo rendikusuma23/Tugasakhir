@@ -24,12 +24,6 @@
 
 @section('content')
 
-@if(session('sukses'))
-        <div class="alert alert-success" role="alert">
-            {{session('sukses')}}
-        </div>
-        @endif
-
 <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -41,7 +35,7 @@
         </div>
       </div>
       <!-- /.card-header -->
-      <div class="card-body table-responsive p-0" style="height: 350px;">
+      <div class="card-body table-responsive p-0" style="height: 450px;">
         <table class="table table-head-fixed text-nowrap table-hover text-nowrap" id="tabeldata">
           <thead>
             <tr >
@@ -57,15 +51,45 @@
                 $no=1;
             @endphp
             @foreach ($data as $g)
-            <tr class="clickable-row" data-href="/operator/dataguru/{{$g->id}}">
+            <tr >
               <td>{{$no++}}</td>
             <td>{{$g->nama}}</td>
             <td>{{$g->nuptk}}</td>
             <td>{{$g->jabatan}}</td>
-            <td>
-              <a href="">
-                <button type="button" class="btn btn-danger btn-sm m-1 ">Hapus </button>
-              </a>
+            <td >
+              <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('data_guru.destroy', $g->id) }}"method="POST">
+                <a href="{{ url('/operator/dataguru', $g->id) }}" class="btn btn-sm btn-success waves-effect m-r-20">Detail</a>
+                @csrf
+                @method('DELETE')
+                <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal-danger{{$g->id}}">
+                Hapus
+              </button>
+              </form>
+              <div class="modal fade" id="modal-danger{{$g->id}}">
+                <div class="modal-dialog">
+                  <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Hapus Data</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="{{ route('data_guru.destroy', $g->id) }}"method="POST">
+                      @csrf
+                      @method('DELETE')
+                      
+                    
+                    <div class="modal-body">
+                      <p>Apakah Anda yakin untuk menghapus data ini?</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-outline-light" data-dismiss="modal">Tutup</button>
+                      <button type="submit" class="btn btn-outline-light">Hapus</button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
             </tr>
                 
@@ -90,47 +114,6 @@
         });
     });
 </script>
-
-{{-- <script>
-  $(function () {
-      $("#tabeldata").DataTable();
-      $("#tabelSuratkeluar").DataTable();
-      $("#tabelAgendaMasuk").DataTable();
-      $("#tabelAgendaKeluar").DataTable();
-      $("#tabelKlasifikasi").DataTable({
-          "paging": true,
-          "lengthChange": true,
-          "searching": true,
-          "ordering": true,
-          "info": true,
-          "autoWidth": true,
-      });
-  });
-
-  $(function () {
-      $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-          event.preventDefault();
-          $(this).ekkoLightbox({
-              alwaysShowClose: true
-          });
-      });
-
-      $('.filter-container').filterizr({
-          gutterPixels: 3
-      });
-      $('.btn[data-filter]').on('click', function () {
-          $('.btn[data-filter]').removeClass('active');
-          $(this).addClass('active');
-      });
-  });
-</script>
-
-<!-- DataTables -->
-<link rel="stylesheet" href="{{asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-<script src="{{asset('lte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script> --}}
 
 
 @endsection

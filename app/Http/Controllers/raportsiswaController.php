@@ -15,17 +15,39 @@ class raportsiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         //
         // $data = raport::where('id',$id)->get();
         // return view('/siswa/raport',['siswa'=>$data]);./
         $siswa = data_siswa::where('email', Auth::user()->email)->pluck('id');
-        $data = raport::where('siswa', $siswa[0])->get();
+        $data = array();
         return view('/siswa/raport',compact('data'));
 
         // $data = raport::all();
         // return view('siswa.raport', compact('data'));
+    }
+
+    public function filtersiswaraport(Request $request)
+    {
+        //
+        // echo $request->kelas;
+        if ($request->tahun == "") {
+            if ($request->semester == "") {
+                $data = raport::all();
+            } else {
+                $data = raport::where(['semester'=>$request->semester])->get();
+            }
+        } else {
+            if ($request->semester == "") {
+                $data = raport::where(['tahun'=>$request->tahun])->get();
+            } else {
+                $data = raport::where(['tahun'=>$request->tahun, 'semester'=>$request->semester])->get();
+            }
+        }
+        
+        return view('siswa.raport', compact('data'));
     }
 
     /**
@@ -54,7 +76,8 @@ class raportsiswaController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */  
+    
     public function show($id)
     {
         //

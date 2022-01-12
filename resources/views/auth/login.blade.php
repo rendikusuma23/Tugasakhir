@@ -7,18 +7,24 @@
         <div class="row">
           <div class="col-md-6 order-md-2">
             <img src="{{asset('lte/login/images/child.svg')}}" alt="Image" class="img-fluid">
-          </div>
+             </div>
           <div class="col-md-6 contents">
             <div class="row justify-content-center">
               <div class="col-md-8">
                 <div class="mb-4">
-                <h3>Sign In to <strong>Siakad</strong></h3>
-                <p class="mb-4 text-dark"> Kelompok bermain & taman kanak-kanak plus dewi masyithoh kalikangkung</p>
+                  <div class="text-center">
+                    <img class="profile-user-img mb-3 img-fluid img-circle"
+                         src="{{asset('lte/dist/img/tk')}}.jpg"
+                         alt="User profile picture"
+                         style="height: 150px" >
+                  </div>
+                <h4> <strong>Siakad Kelompok bermain & taman kanak-kanak plus dewi masyithoh</strong></h4>
+                <p class="mb-4 text-dark"> Masuk untuk akses ke layanan akademik sekolah dengan mudah dan cepat</p>
               </div>
               <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="form-group first">
-                  <label for="Email">Email</label>
+                  <label for="Email">Username</label>
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="email" autofocus>
   
                                   @error('email')
